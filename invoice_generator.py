@@ -8,6 +8,7 @@ from faker import Faker
 fake = Faker('fr_FR')
 tab = []
 
+cities = ["Yaounde", "Douala", "Bafoussam", "Bamenda", "Kribi", "Bertoua"]
 my_word_list = [ 'Pizza au fromage', 'Hamburger', 'Cheeseburger', 'Moules Marinières', 'Salade Grecque',
         'Petit Hamburger', 'Petit Cheeseburger', 'Petit Bacon Burger', 'Petit Bacon Cheeseburger',
         'Sandwich Vegan', 'Sandwich Vegan au fromage', 'Fromage grillé', 'Pates',
@@ -40,6 +41,7 @@ def generate_invoices(nber):
                 "ref": ref,
                 "name": name,
                 "date": date,
+                "city": random.choice(cities),
                 "menus": [],
             }
 
@@ -60,7 +62,7 @@ def generate_invoices(nber):
             invoice["total_price"] = total
             invoices.append(invoice)
 
-        csv_columns = ['ref' ,'name','date','menus', 'total_price']
+        csv_columns = ['ref' ,'name','date', 'city', 'menus', 'total_price']
 
         try:
             with open('invoice_dataset.csv', 'w') as csvfile:
